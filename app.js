@@ -23,11 +23,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log(`${server.name} listening to ${server.url}`);
 });
 
-// webchat page
-server.get('/webchat', restify.serveStatic({
-    directory: './public',
-    default: 'index.html'
-}));
+
 
 //Get secrets from server environment
 var connector = new builder.ChatConnector({
@@ -40,6 +36,16 @@ var bot = new builder.UniversalBot(connector);
 
 // bind connector to messages endpoint
 server.post('/api/messages', connector.listen());
+
+// webchat page
+server.get('/', restify.serveStatic({
+  directory: './public',
+  default: 'index.html'
+}));
+server.get('/chat', restify.serveStatic({
+    directory: './public',
+    default: 'index.html'
+}));
 
 // welcome message
 bot.on('conversationUpdate', function (message) {
