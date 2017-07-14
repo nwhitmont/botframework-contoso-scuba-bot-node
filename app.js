@@ -23,6 +23,12 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log(`${server.name} listening to ${server.url}`);
 });
 
+// webchat page
+server.get('/webchat', restify.serveStatic({
+    directory: './public',
+    default: 'index.html'
+}));
+
 //Get secrets from server environment
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID, 
