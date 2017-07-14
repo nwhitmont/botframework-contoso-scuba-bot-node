@@ -1,0 +1,21 @@
+{
+  "name": "contoso-scuba-bot-node",
+  "version": "1.0.0",
+  "description": "Contoso Scuba Bot Example for Bot Framework Node SDK",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [
+    "botframework",
+    "botbuilder",
+    "node",
+    "bots"
+  ],
+  "author": "Nils Whitmont <v-niwh@microsoft.com>",
+  "license": "MIT",
+  "dependencies": {
+    "botbuilder": "^3.8.4",
+    "restify": "^5.0.0"
+  }
+}
