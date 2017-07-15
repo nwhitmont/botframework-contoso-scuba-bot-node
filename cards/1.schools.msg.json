@@ -18,6 +18,70 @@
                                     {
                                         "type": "Image",
                                         "size": "medium",
+                                        "url": "https://adaptivecards-staging.azurewebsites.net/content/AdventureWorksLogo.png"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Column",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "Adventure Works",
+                                        "size": "large",
+                                        "weight": "bolder"
+                                    },
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "3.2 stars",
+                                        "separation": "none"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": "7 miles away",
+                        "weight": "bolder"
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": "510 N Yale Ave.",
+                        "separation": "none"
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": "Seattle, WA 98127",
+                        "separation": "none"
+                    }
+                ],
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "Let's Go!",
+                        "data": {
+                            "school": "Adventure Works"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": {
+                "type": "AdaptiveCard",
+                "body": [
+                    {
+                        "type": "ColumnSet",
+                        "columns": [
+                            {
+                                "type": "Column",
+                                "size": "auto",
+                                "items": [
+                                    {
+                                        "type": "Image",
+                                        "size": "medium",
                                         "url": "https://adaptivecards-staging.azurewebsites.net/content/FabrikamLogo.png"
                                     }
                                 ]
@@ -59,73 +123,9 @@
                 "actions": [
                     {
                         "type": "Action.Submit",
-                        "title": "This one",
+                        "title": "Go Diving!",
                         "data": {
                             "school": "Fabrikam"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "contentType": "application/vnd.microsoft.card.adaptive",
-            "content": {
-                "type": "AdaptiveCard",
-                "body": [
-                    {
-                        "type": "ColumnSet",
-                        "columns": [
-                            {
-                                "type": "Column",
-                                "size": "auto",
-                                "items": [
-                                    {
-                                        "type": "Image",
-                                        "size": "medium",
-                                        "url": "https://adaptivecards-staging.azurewebsites.net/content/MargiesTravel.png"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "Column",
-                                "items": [
-                                    {
-                                        "type": "TextBlock",
-                                        "text": "Margie's Travel",
-                                        "size": "large",
-                                        "weight": "bolder"
-                                    },
-                                    {
-                                        "type": "TextBlock",
-                                        "text": "4.4 stars",
-                                        "separation": "none"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type": "TextBlock",
-                        "text": "42 miles away",
-                        "weight": "bolder"
-                    },
-                    {
-                        "type": "TextBlock",
-                        "text": "1602 E Avenue Rd.",
-                        "separation": "none"
-                    },
-                    {
-                        "type": "TextBlock",
-                        "text": "Gig Harbor, WA 98335",
-                        "separation": "none"
-                    }
-                ],
-                "actions": [
-                    {
-                        "type": "Action.Submit",
-                        "title": "This one",
-                        "data": {
-                            "school": "Margie's Travel"
                         }
                     }
                 ]
@@ -210,7 +210,7 @@
                                     {
                                         "type": "Image",
                                         "size": "medium",
-                                        "url": "https://adaptivecards-staging.azurewebsites.net/content/AdventureWorksLogo.png"
+                                        "url": "https://adaptivecards-staging.azurewebsites.net/content/MargiesTravel.png"
                                     }
                                 ]
                             },
@@ -219,13 +219,13 @@
                                 "items": [
                                     {
                                         "type": "TextBlock",
-                                        "text": "Adventure Works",
+                                        "text": "Margie's Travel",
                                         "size": "large",
                                         "weight": "bolder"
                                     },
                                     {
                                         "type": "TextBlock",
-                                        "text": "3.2 stars",
+                                        "text": "4.4 stars",
                                         "separation": "none"
                                     }
                                 ]
@@ -234,17 +234,17 @@
                     },
                     {
                         "type": "TextBlock",
-                        "text": "7 miles away",
+                        "text": "42 miles away",
                         "weight": "bolder"
                     },
                     {
                         "type": "TextBlock",
-                        "text": "510 N Yale Ave.",
+                        "text": "1602 E Avenue Rd.",
                         "separation": "none"
                     },
                     {
                         "type": "TextBlock",
-                        "text": "Seattle, WA 98127",
+                        "text": "Gig Harbor, WA 98335",
                         "separation": "none"
                     }
                 ],
@@ -253,7 +253,7 @@
                         "type": "Action.Submit",
                         "title": "Let's Go!",
                         "data": {
-                            "school": "Adventure Works"
+                            "school": "Margie's Travel"
                         }
                     }
                 ]
