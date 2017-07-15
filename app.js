@@ -38,11 +38,11 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 // webchat page
-server.get('/', restify.serveStatic({
+server.get('/', restify.plugins.serveStatic({
   directory: './public',
   default: 'index.html'
 }));
-server.get('/chat', restify.serveStatic({
+server.get('/chat', restify.plugins.serveStatic({
     directory: './public',
     default: 'index.html'
 }));
