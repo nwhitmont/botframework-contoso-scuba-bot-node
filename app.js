@@ -181,6 +181,6 @@ bot.dialog('danger', function (session) {
 // restart dialog handler
 bot.dialog('restart', function (session) {
     session.beginDialog('welcome_user');
-});
+}).triggerAction({matches: /restart|quit/i});
 
 // END OF LINE
