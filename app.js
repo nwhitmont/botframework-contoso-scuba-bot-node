@@ -133,10 +133,9 @@ bot.dialog('pick_lunch', function (session, options) {
 
 bot.dialog('personal_info', function (session, options) {
     if (session.message && session.message.value) {
-        console.log('got personalInfo:');
-        console.log(session.message.value.personalInfo);
-        
-        session.userData.contacts = session.message.value.personalInfo;
+        session.userData.firstlast = session.message.value.firstlast;
+        session.userData.email = session.message.value.email;
+        session.userData.phone = session.message.value.phone;
         session.beginDialog('weather')
         return;
     }
@@ -148,12 +147,11 @@ bot.dialog('weather', function (session, options) {
 
     var weather_msg = require('./cards/7.weather.msg.json');
 
-    weather_msg.text = weather_msg.text
-        .replace(/{{name}})/, session.userData.contacts.firstlast)
-        .replace(/{{email}}/, session.userData.contacts.email)
-        .replace(/{{phone}}/, session.userData.contacts.phone)
-        .replace(/{{school}}/, session.userData.school)
-        .replace(/{{destination}}/, session.userData.destination);
+    weather_msg.text = weather_msg.text.replace(/{{name}})/, session.userData.firstlast);
+    weather_msg.text = weather_msg.text.replace(/{{email}}/, session.userData.email)
+    weather_msg.text = weather_msg.text.replace(/{{phone}}/, session.userData.phone)
+    weather_msg.text = weather_msg.text.replace(/{{school}}/, session.userData.school)
+    weather_msg.text = weather_msg.text.replace(/{{destination}}/, session.userData.destination);
 
     //weather_msg.attachments[0].content.speak = weather_msg.attachments[0].content.speak.replace(/{{weekday}}/, options.weekday);
     
