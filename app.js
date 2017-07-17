@@ -68,6 +68,11 @@ bot.dialog('/', function (session) {
     session.send("default dialog here");
 });
 
+bot.dialog('welcome_user', function (session) {
+    var welcome_msg = require('./cards/0.welcome.msg.json');
+    session.send(welcome_msg)
+});
+
 // "where can I go scuba diving?"
 bot.dialog('pick_school', function (session) {
     // handle card submit action
@@ -110,7 +115,7 @@ bot.dialog('pick_people', function (session, options) {
 
 bot.dialog('pick_date', function (session, options) {
     if (session.message && session.message.value) {
-        session.userData.date = session.message.value.date;
+        session.userData.date = session.message.value.scheduleDate;
         session.message.value = null;
         session.beginDialog('pick_lunch');
         return;
@@ -140,6 +145,7 @@ bot.dialog('personal_info', function (session, options) {
         return;
     }
     var personal_info_msg = require('./cards/6.personal-info.msg.json');
+    personal_info_msg.address = session.message.address;
     session.send(personal_info_msg);
 }).triggerAction({matches: /info/i});
 
@@ -147,21 +153,20 @@ bot.dialog('weather', function (session, options) {
 
     var weather_msg = require('./cards/7.weather.msg.json');
 
-    weather_msg.text = weather_msg.text.replace(/{{name}})/, session.userData.firstlast);
+    weather_msg.text = weather_msg.text.replace(/{{name}}/, session.userData.firstlast);
     weather_msg.text = weather_msg.text.replace(/{{email}}/, session.userData.email)
     weather_msg.text = weather_msg.text.replace(/{{phone}}/, session.userData.phone)
     weather_msg.text = weather_msg.text.replace(/{{school}}/, session.userData.school)
     weather_msg.text = weather_msg.text.replace(/{{destination}}/, session.userData.destination);
 
-    //weather_msg.attachments[0].content.speak = weather_msg.attachments[0].content.speak.replace(/{{weekday}}/, options.weekday);
+    weather_msg.attachments[0].content.speak = weather_msg.attachments[0].content.speak.replace(/{{weekday}}/, "Saturday");
     
-    // weather_msg.attachments[0].content.body[0].columns[1].items[0].text = weather_msg.attachments[0].content.body[0].columns[1].items[0].text
-    //     .replace(/{{longdate}}/, options.longdate);
+    weather_msg.attachments[0].content.body[0].columns[1].items[0].text = weather_msg.attachments[0].content.body[0].columns[1].items[0].text.replace(/{{longdate}}/, "Thursday, July 27th");
 
-        // .replace(/{{day1}}/, options.day1)
-        // .replace(/{{day2}}/, options.day2)
-        // .replace(/{{day3}}/, options.day3)
-        // .replace(/{{day4}}/, options.day4);
+    weather_msg.attachments[0].content.body[1].columns[0].items[0].text = weather_msg.attachments[0].content.body[1].columns[0].items[0].text.replace(/{{day1}}/, 'Thurs');
+    weather_msg.attachments[0].content.body[1].columns[1].items[0].text = weather_msg.attachments[0].content.body[1].columns[1].items[0].text.replace(/{{day2}}/, 'Fri');
+    weather_msg.attachments[0].content.body[1].columns[2].items[0].text = weather_msg.attachments[0].content.body[1].columns[2].items[0].text.replace(/{{day3}}/, 'Sat');
+    weather_msg.attachments[0].content.body[1].columns[3].items[0].text = weather_msg.attachments[0].content.body[1].columns[3].items[0].text.replace(/{{day4}}/, 'Sun');
 
     session.send(weather_msg);
     session.endDialog();
