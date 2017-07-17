@@ -42,7 +42,7 @@
                   {
                     "type": "Input.Text",
                     "id": "firstlast",
-                    "placeholder": "Last, First",
+                    "placeholder": "Name",
                     "style": "text",
                     "separataion": "none"
                   },
