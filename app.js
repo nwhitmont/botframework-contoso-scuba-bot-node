@@ -139,14 +139,14 @@ bot.dialog('personal_info', function (session, options) {
     }
     var personal_info_msg = require('./cards/6.personal-info.msg.json');
     session.send(personal_info_msg);
-});
+}).triggerAction({matches: /info/i});
 
 bot.dialog('weather', function (session, options) {
 
     var weather_msg = require('./cards/7.weather.msg.json');
 
     weather_msg.text = weather_msg.text
-        .replace(/{{name}})/, session.userData.contacts.name)
+        .replace(/{{name}})/, session.userData.contacts.firstlast)
         .replace(/{{email}}/, session.userData.contacts.email)
         .replace(/{{phone}}/, session.userData.contacts.phone)
         .replace(/{{school}}/, session.userData.school)
