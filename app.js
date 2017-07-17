@@ -132,7 +132,10 @@ bot.dialog('pick_lunch', function (session, options) {
 });
 
 bot.dialog('personal_info', function (session, options) {
-    if (session.message.value) {
+    if (session.message && session.message.value) {
+        console.log('got personalInfo:');
+        console.log(session.message.value.personalInfo);
+        
         session.userData.contacts = session.message.value.personalInfo;
         session.beginDialog('weather')
         return;
