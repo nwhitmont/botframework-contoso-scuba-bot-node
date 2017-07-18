@@ -1,5 +1,6 @@
 {
   "type": "message",
+  "speak": "Looks like a great day for some diving!",
   "text": "Your meal preferences are recorded, and your trip is confirmed.\n\n{{name}}\n\n{{email}}\n\n{{phone}}\n\nWith {{school}} at {{destination}}\n\n Here is a weather forecast for your trip:",
   "attachments": [
     {

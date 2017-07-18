@@ -37,11 +37,13 @@ var bot = new builder.UniversalBot(connector);
 // bind connector to messages endpoint
 server.post('/api/messages', connector.listen());
 
-// webchat page
+// landing page
 server.get('/', restify.plugins.serveStatic({
   directory: './public',
   default: 'index.html'
 }));
+
+// webchat page
 server.get('/chat', restify.plugins.serveStatic({
     directory: './public',
     default: 'index.html'
@@ -80,7 +82,7 @@ bot.dialog('pick_school', function (session) {
     if (session.message && session.message.value) {
         session.userData.school = session.message.value.school;
         session.message.value = null; // clear message.varue
-        session.beginDialog('pick_destination', { school_name: session.userData.school });
+        session.beginDialog('pick_destination');
         return;
     }
     var schools_msg = require('./cards/1.schools.msg.json');
@@ -92,11 +94,12 @@ bot.dialog('pick_destination', function (session, options) {
     if (session.message && session.message.value) {
         session.userData.destination = session.message.value.destination;
         session.message.value = null;
-        session.beginDialog('pick_people', { destination: session.userData.destination });
+        session.beginDialog('pick_people');
         return;
     }
     var destinations_msg = require('./cards/2.destinations.msg.json');
-    destinations_msg.attachments[0].content.body[0].text = destinations_msg.attachments[0].content.body[0].text.replace(/{{school}}/, options.school_name);
+    destinations_msg.speak = destinations_msg.speak.replace(/{{school}}/, session.userData.school);
+    destinations_msg.attachments[0].content.body[0].text = destinations_msg.attachments[0].content.body[0].text.replace(/{{school}}/, session.userData.school);
     session.send(destinations_msg);
 });
 
@@ -104,12 +107,12 @@ bot.dialog('pick_people', function (session, options) {
     if (session.message && session.message.value) {
         session.userData.people = session.message.value.numberOfPeople;
         session.message.value = null;
-        session.beginDialog('pick_date', { people: session.userData.people });
+        session.beginDialog('pick_date');
         return;
     }
     var people_msg = require('./cards/3.people.msg.json');
     // set destination name in card text
-    people_msg.attachments[0].content.body[0].text = people_msg.attachments[0].content.body[0].text.replace(/{{destination}}/, options.destination);
+    people_msg.attachments[0].content.body[0].text = people_msg.attachments[0].content.body[0].text.replace(/{{destination}}/, session.userData.destination);
     session.send(people_msg);
 
 })
@@ -131,7 +134,8 @@ bot.dialog('pick_date', function (session, options) {
         return;
     }
     var date_msg = require('./cards/4.date.msg.json');
-    date_msg.attachments[0].content.body[0].columns[0].items[0].text = date_msg.attachments[0].content.body[0].columns[0].items[0].text.replace('{{number_of_people}}', options.people);
+    date_msg.speak = date_msg.speak.replace(/{{number_of_people}}/, session.userData.people);
+    date_msg.attachments[0].content.body[0].columns[0].items[0].text = date_msg.attachments[0].content.body[0].columns[0].items[0].text.replace('{{number_of_people}}', session.userData.people);
     session.send(date_msg);
 })
 

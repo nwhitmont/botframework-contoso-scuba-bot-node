@@ -1,6 +1,7 @@
 {
   "type": "message",
   "text": "Hi! I'm Contoso Dive Finder!\n\nI'll help you schedule a scuba getaway!",
+  "speak": "Hi! I'm Contoso Dive Finder! I'll help you schedule a scuba getaway!",
   "attachments": [
     {
       "contentType": "application/vnd.microsoft.card.adaptive",

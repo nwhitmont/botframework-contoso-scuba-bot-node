@@ -1,5 +1,6 @@
 {
   "type": "message",
+  "speak": "Here are some wildlife you might encounter in the area.",
   "attachments": [
     {
       "contentType": "application/vnd.microsoft.card.adaptive",

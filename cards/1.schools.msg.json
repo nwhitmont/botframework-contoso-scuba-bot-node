@@ -1,6 +1,7 @@
 {
     "type": "message",
     "text": "Good afternoon! Please take a look at the great scuba schools nearby.",
+    "speak": "Good afternoon! Please take a look at the great scuba schools nearby.  Fabrikam, Margie's Travel, Relecloud Diving, or Adventure Works",
     "attachmentLayout": "carousel",
     "attachments": [
         {
