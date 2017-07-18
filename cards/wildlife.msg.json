@@ -1,5 +1,6 @@
 {
   "type": "message",
+  "inputHint": "expectingInput",
   "speak": "Here are some wildlife you might encounter in the area.",
   "attachments": [
     {

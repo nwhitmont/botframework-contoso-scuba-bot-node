@@ -1,5 +1,6 @@
 {
   "type": "message",
+  "inputHint": "expectingInput",
   "attachments": [
     {
       "contentType": "application/vnd.microsoft.card.adaptive",
