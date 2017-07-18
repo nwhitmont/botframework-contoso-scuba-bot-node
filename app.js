@@ -9,6 +9,7 @@
 
 // NODE MODULES
 var builder = require('botbuilder');
+var moment = require('moment');
 var restify = require('restify');
 
 // LOCAL VARS
@@ -84,7 +85,7 @@ bot.dialog('pick_school', function (session) {
     }
     var schools_msg = require('./cards/1.schools.msg.json');
     session.send(schools_msg);
-}).triggerAction({matches: /scuba/i});
+}).triggerAction({matches: /scuba|diving|dive/i});
 
 
 bot.dialog('pick_destination', function (session, options) {
@@ -115,7 +116,16 @@ bot.dialog('pick_people', function (session, options) {
 
 bot.dialog('pick_date', function (session, options) {
     if (session.message && session.message.value) {
-        session.userData.date = session.message.value.scheduleDate;
+        var selectedDate = session.message.value.scheduleDate;
+        session.userData.date = selectedDate;
+        // compute various date formats used by weather card
+        session.userData.longdate = moment(selectedDate).format('dddd MMM Do');
+        session.userData.weekday = moment(selectedDate).format('dddd');
+        session.userData.day1 = moment(selectedDate).format('ddd');
+        session.userData.day2 = moment(selectedDate).add(1, 'days').format('ddd');
+        session.userData.day3 = moment(selectedDate).add(2, 'days').format('ddd');
+        session.userData.day4 = moment(selectedDate).add(3, 'days').format('ddd');
+        // clear out message.value
         session.message.value = null;
         session.beginDialog('pick_lunch');
         return;
@@ -159,14 +169,14 @@ bot.dialog('weather', function (session, options) {
     weather_msg.text = weather_msg.text.replace(/{{school}}/, session.userData.school)
     weather_msg.text = weather_msg.text.replace(/{{destination}}/, session.userData.destination);
 
-    weather_msg.attachments[0].content.speak = weather_msg.attachments[0].content.speak.replace(/{{weekday}}/, "Saturday");
+    weather_msg.attachments[0].content.speak = weather_msg.attachments[0].content.speak.replace(/{{weekday}}/, session.userData.weekday);
     
-    weather_msg.attachments[0].content.body[0].columns[1].items[0].text = weather_msg.attachments[0].content.body[0].columns[1].items[0].text.replace(/{{longdate}}/, "Thursday, July 27th");
+    weather_msg.attachments[0].content.body[0].columns[1].items[0].text = weather_msg.attachments[0].content.body[0].columns[1].items[0].text.replace(/{{longdate}}/, session.userData.longdate);
 
-    weather_msg.attachments[0].content.body[1].columns[0].items[0].text = weather_msg.attachments[0].content.body[1].columns[0].items[0].text.replace(/{{day1}}/, 'Thurs');
-    weather_msg.attachments[0].content.body[1].columns[1].items[0].text = weather_msg.attachments[0].content.body[1].columns[1].items[0].text.replace(/{{day2}}/, 'Fri');
-    weather_msg.attachments[0].content.body[1].columns[2].items[0].text = weather_msg.attachments[0].content.body[1].columns[2].items[0].text.replace(/{{day3}}/, 'Sat');
-    weather_msg.attachments[0].content.body[1].columns[3].items[0].text = weather_msg.attachments[0].content.body[1].columns[3].items[0].text.replace(/{{day4}}/, 'Sun');
+    weather_msg.attachments[0].content.body[1].columns[0].items[0].text = weather_msg.attachments[0].content.body[1].columns[0].items[0].text.replace(/{{day1}}/, session.userData.day1);
+    weather_msg.attachments[0].content.body[1].columns[1].items[0].text = weather_msg.attachments[0].content.body[1].columns[1].items[0].text.replace(/{{day2}}/, session.userData.day2);
+    weather_msg.attachments[0].content.body[1].columns[2].items[0].text = weather_msg.attachments[0].content.body[1].columns[2].items[0].text.replace(/{{day3}}/, session.userData.day3);
+    weather_msg.attachments[0].content.body[1].columns[3].items[0].text = weather_msg.attachments[0].content.body[1].columns[3].items[0].text.replace(/{{day4}}/, session.userData.day4);
 
     session.send(weather_msg);
     session.endDialog();
